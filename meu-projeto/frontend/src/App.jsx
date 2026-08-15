@@ -1,59 +1,62 @@
+import { useState } from 'react'
 import './App.css'
+import Header from './header.jsx'
+import Emalta, { listadeeventos } from './emalta.jsx'
 
 function App() {
-  function cadastrar(event) {
-    event.preventDefault() 
-    console.log('Formulário enviado')
-}
-  var Name
-    return (
+  const [eventoSelecionado, setEventoSelecionado] = useState(null)
+
+  const evento = listadeeventos.find(
+    (evento) => evento.id === eventoSelecionado
+  )
+
+  return (
     <>
-      <h1>Cadastro</h1>
+      <Header />
 
-      <form onSubmit={cadastrar}>
+      {eventoSelecionado === null ? (
+        <Emalta
+          setEventoSelecionado={setEventoSelecionado}
+        />
+      ) : (
+        <div>
+          <p>Evento ID: {eventoSelecionado}</p>
 
-        <label>
-          Name:
+          <h1>{evento?.nome}</h1>
+
+          {/* Todas as imagens do evento */}
+          <div className="imagens-evento">
+            {evento?.imagens.map((imagem, index) => (
+              <img
+                key={index}
+                src={imagem}
+                alt={`${evento.nome} - imagem ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Quantidade de ingressos */}
           <input
-            type="text"
-            name="nome"
-            placeholder="Digite seu nome"
-            value={Name}
-           
+            type="number"
+            placeholder="Quantidade de ingressos"
           />
-        </label>
 
-        <p>Tipo de usuário:</p>
+          <button id="comprar">
+            Comprar
+          </button>
 
-        <label>
-          <input
-            type="radio"
-            name="tipo"
-            value="user"
-  
+          {/* Voltar para Em Alta */}
+          <button onClick={() => setEventoSelecionado(null)}>
+            Voltar
+          </button>
 
-          />
-          Comprador
-        </label>
+          <h3>Histórico de compra:</h3>
 
-        <label>
-          <input
-            type="radio"
-            name="tipo"
-            value="adm"
-           
-    
-          />
-          Criador de evento
-        </label>
-
-        <br /><br />
-
-        <button type="submit">
-          Cadastrar
-        </button>
-
-      </form>
+          <div>
+            data da compra, quantidade de ingressos
+          </div>
+        </div>
+      )}
     </>
   )
 }
