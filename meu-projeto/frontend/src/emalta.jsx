@@ -1,4 +1,4 @@
-import './emalta.css'
+import './App.css'
 export const listadeeventos = [
   {
     id: 1,
@@ -23,8 +23,8 @@ function Emalta({ setEventoSelecionado }) {
 
 
   return (
-    <>
-      <div className="emalta">
+    <><div className="emalta">
+      <div >
         <h1>Em Alta</h1>
       </div>
 
@@ -38,6 +38,7 @@ function Emalta({ setEventoSelecionado }) {
          onClick={() => setEventoSelecionado(evento.id)}
       />
     ))}
+      </div>
       </div>
     </>
   )

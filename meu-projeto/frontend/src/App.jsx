@@ -1,62 +1,29 @@
 import { useState } from 'react'
 import './App.css'
-import Header from './header.jsx'
-import Emalta, { listadeeventos } from './emalta.jsx'
+import Home from './pages/home.jsx'
+import Cadastro from './pages/Cadastro.jsx'
+import Login from './pages/Login.jsx'
 
 function App() {
-  const [eventoSelecionado, setEventoSelecionado] = useState(null)
-
-  const evento = listadeeventos.find(
-    (evento) => evento.id === eventoSelecionado
-  )
+  const [pagina, setPagina] = useState('home')
 
   return (
     <>
-      <Header />
+      {pagina === 'home' && <Home />}
+      {pagina === 'cadastro' && <Cadastro />}
+      {pagina === 'login' && <Login />}
 
-      {eventoSelecionado === null ? (
-        <Emalta
-          setEventoSelecionado={setEventoSelecionado}
-        />
-      ) : (
-        <div>
-          <p>Evento ID: {eventoSelecionado}</p>
+      <button onClick={() => setPagina('home')}>
+        Home
+      </button>
 
-          <h1>{evento?.nome}</h1>
+      <button onClick={() => setPagina('cadastro')}>
+        Cadastro
+      </button>
 
-          {/* Todas as imagens do evento */}
-          <div className="imagens-evento">
-            {evento?.imagens.map((imagem, index) => (
-              <img
-                key={index}
-                src={imagem}
-                alt={`${evento.nome} - imagem ${index + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Quantidade de ingressos */}
-          <input
-            type="number"
-            placeholder="Quantidade de ingressos"
-          />
-
-          <button id="comprar">
-            Comprar
-          </button>
-
-          {/* Voltar para Em Alta */}
-          <button onClick={() => setEventoSelecionado(null)}>
-            Voltar
-          </button>
-
-          <h3>Histórico de compra:</h3>
-
-          <div>
-            data da compra, quantidade de ingressos
-          </div>
-        </div>
-      )}
+      <button onClick={() => setPagina('login')}>
+        Login
+      </button>
     </>
   )
 }
