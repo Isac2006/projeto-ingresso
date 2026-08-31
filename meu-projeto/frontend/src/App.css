@@ -1,208 +1,442 @@
-:root  {
-  --color-primary: #f42e16;
-  --color-secondary: #f75d3e;
-  --color-tertiary: #fa8c66;
-  --color-quaternary: #fcbb8e;
-  --color-quinary: #ffeab6;
+:root {
+  /* Cores exatas extraídas do inspetor Figma */
+  --primary-blue: #2563eb;
+  --primary-purple: #7c3aed;
+  --gradient-primary: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+  
+  --bg-main: #f8fafc;
+  --surface-white: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-light: #e2e8f0;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--color-quinary);
-  justify-content: center;
-  align-items: center;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
-.evento-selecionado {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px;
-  border-radius: 10px;
-}
-.buttoneventos {
-  background-color: var(--color-tertiary);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.input-quantidade {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  color:white;
-  border: 1px solid #ccc;
-  background-color: var(--color-tertiary);
-}
+
+/* Header com o gradiente exato */
 header {
-  background-color: var(--color-primary);
+  background: var(--gradient-primary);
   color: white;
-  padding: 20px;
-  text-align: center;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+header h1, header .logo {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+header nav a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+/* Barra de Busca */
 .input-pesquisa {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: var(--color-quaternary);
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 24px auto;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background-color: var(--surface-white);
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  outline: none;
+  box-sizing: border-box;
 }
-.emalta {
-  background-color: var(--color-secondary);
+
+.input-pesquisa:focus {
+  border-color: var(--primary-purple);
+}
+
+/* Títulos das Seções */
+h2, .secao-titulo {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 32px 0 20px;
+}
+
+/* Seções e Grids de Cards */
+.emalta, #emaltaeventos, .grid-eventos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Card de Evento (Design idêntico ao Figma) */
+.card-evento {
+  width: 260px;
+  background-color: var(--surface-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card-evento:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagem do Card com fallback para o gradiente */
+.imagem-em-alta, .card-evento img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 0;
+}
+
+.card-conteudo {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.card-evento h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card-evento .organizador, .card-evento .detalhes {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.card-rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+}
+
+.card-evento .preco {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-purple);
+}
+
+/* Botões da Aplicação */
+.buttoneventos, .card-evento button, .login button, .cadastro button {
+  background: var(--gradient-primary);
   color: white;
-  padding: 20px;
-  position: relative;
-  border-radius: 8px;
-  width: 80%;
-  height: 70%;
-    margin: 20px auto;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.buttoneventos:hover, .card-evento button:hover, .login button:hover, .cadastro button:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Telas de Login e Cadastro */
+.login, .cadastro {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  padding: 32px;
+  background-color: var(--surface-white);
+  border-radius: var(--radius-lg);
+  margin: 40px auto;
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+}
+
+.login h1, .cadastro h1 {
+  margin: 0 0 20px;
+  color: var(--text-primary);
+  font-size: 22px;
   text-align: center;
 }
-.cadastro {
+
+.login input, .cadastro input, .input-quantidade {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+}
+
+.login input:focus, .cadastro input:focus, .input-quantidade:focus {
+  border-color: var(--primary-purple);
+  background-color: var(--surface-white);
+}
+
+/* Carrossel ajustado */
+.carousel-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.carousel-viewport {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-primary);
+}
+
+.carousel-track {
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 400px;
-  max-width: 90%;
-  padding: 35px;
-
-  background-color: var(--color-primary);
-  border-radius: 15px;
-
-  margin: 50px auto;
-
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 5;
 }
 
-.cadastro h1 {
-  margin-bottom: 25px;
-  color: white;
-  font-size: 28px;
+.carousel-arrow--prev { left: 12px; }
+.carousel-arrow--next { right: 12px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
 }
 
-.cadastro input {
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--border-light);
+}
+
+.carousel-dot--active {
+  background: var(--primary-purple);
+  transform: scale(1.2);
+}/* Container Principal da Página Interna do Evento */
+.evento-selecionado {
+  background-color: var(--surface-white);
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   box-sizing: border-box;
+}
 
+.evento-selecionado h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+/* Área de Ações e Formulário de Ingressos */
+.evento-detalhes-compra {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.input-quantidade {
   width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-
-  border: 2px solid transparent;
-  border-radius: 8px;
-
-  background-color: var(--color-quinary);
-  color: #333;
-
-  font-size: 16px;
+  max-width: 300px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-size: 14px;
   outline: none;
-
-  transition: 0.2s;
 }
 
-.cadastro input:focus {
-  border-color: var(--color-secondary);
-  background-color: white;
+.input-quantidade:focus {
+  border-color: var(--primary-purple);
+  background-color: var(--surface-white);
 }
 
-.cadastro input::placeholder {
-  color: #777;
-}
-
-.cadastro button {
-  width: 100%;
-  padding: 12px;
-
+/* Grupo de Botões */
+.acoes-evento {
+  display: flex;
+  gap: 12px;
   margin-top: 10px;
+}
 
-  border: none;
-  border-radius: 8px;
-
-  background-color: var(--color-secondary);
-  color: white;
-
-  font-size: 16px;
-  font-weight: bold;
-
+/* Botão Secundário / Voltar / Cancelar */
+.buttoneventos-outline, 
+.evento-selecionado button:not(#comprar) {
+  background: transparent;
+  color: var(--primary-purple);
+  border: 1px solid var(--primary-purple);
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.2s ease;
 }
 
-.cadastro button:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
+.buttoneventos-outline:hover, 
+.evento-selecionado button:not(#comprar):hover {
+  background-color: rgba(124, 58, 237, 0.05);
 }
-.login {
+
+/* Botão Principal de Compra */
+#comprar, 
+.buttoneventos {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 10px 28px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#comprar:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+/* Seção de Histórico de Compras */
+.historico-container {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+}
+
+.evento-selecionado h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.historico-item {
+  background-color: var(--bg-main);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+  color: var(--text-secondary);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 400px;
-  max-width: 90%;
-  padding: 35px;
-
-  background-color: var(--color-primary);
-  border-radius: 15px;
-
-  margin: 80px auto;
-
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  justify-content: space-between;
+  margin-bottom: 8px;
 }
 
-.login input {
-  box-sizing: border-box;
-
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-
-  border: 2px solid transparent;
-  border-radius: 8px;
-
-  background-color: var(--color-quinary);
-  color: #333;
-
-  font-size: 16px;
-  outline: none;
-
-  transition: 0.2s;
+/* Estilização do Footer Escuro (conforme imagem) */
+footer {
+  background-color: #0f172a;
+  color: #94a3b8;
+  padding: 48px 32px 24px;
+  margin-top: 60px;
 }
 
-.login input:focus {
-  border-color: var(--color-secondary);
-  background-color: white;
+.footer-conteudo {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 32px;
 }
 
-.login input::placeholder {
-  color: #777;
+.footer-coluna h4 {
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 16px;
 }
 
-.login button {
-  width: 100%;
-  padding: 12px;
+.footer-coluna ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  margin-top: 5px;
-
-  border: none;
-  border-radius: 8px;
-
-  background-color: var(--color-secondary);
-  color: white;
-
-  font-size: 16px;
-  font-weight: bold;
-
+.footer-coluna ul li {
+  margin-bottom: 8px;
+  font-size: 13px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.login button:hover {
-  transform: translateY(-2px);
-  opacity: 0.9;
+.footer-coluna ul li:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 32px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid #1e293b;
+  font-size: 12px;
+  color: #64748b;
 }

@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import '../App.css'
 import Header from '../header.jsx'
-import Emalta, { listadeeventos } from '../emalta.jsx'
+import Emalta, { listadeeventos, Carousel } from '../emalta.jsx'
 
 export default function Home(){
   const [eventoSelecionado, setEventoSelecionado] = useState(null)
 
-  // Busca o evento completo a partir do ID selecionado
   const evento = listadeeventos.find(e => e.id === eventoSelecionado)
 
   return <>
@@ -18,19 +17,9 @@ export default function Home(){
         />
       ) : (
         <div className="evento-selecionado">
-          <p>Evento ID: {eventoSelecionado}</p>
-
           <h1>{evento?.nome}</h1>
 
-          <div className="imagens-evento">
-            {evento?.imagens.map((imagem, index) => (
-              <img
-                key={index}
-                src={imagem}
-                alt={`${evento.nome} - imagem ${index + 1}`}
-              />
-            ))}
-          </div>
+          <Carousel imagens={evento?.imagens} nome={evento?.nome} />
 
           <input
             type="number"
