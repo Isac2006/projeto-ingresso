@@ -11,7 +11,13 @@ const todosEventos = [
         local: 'Parque da Cidade, São Paulo',
         status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=500&auto=format&fit=crop',
-        descricao: 'Uma corrida especial para arrecadar fundos e promover a saúde e bem-estar.'
+        descricao: 'Uma corrida especial para arrecadar fundos e promover a saúde e bem-estar.',
+
+        nomeUsuario: 'João Silva',
+        setor: 'Pista A',
+        tipoIngresso: 'Inteira',
+        horarioEntrada: '07:00h',
+        horarioInicio: '08:00h'
     },
     {
         id: 2,
@@ -21,7 +27,12 @@ const todosEventos = [
         local: 'Centro Cultural, São Paulo',
         status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop',
-        descricao: 'Aprenda as principais tendências de UI/UX design com especialistas da área.'
+        descricao: 'Aprenda as principais tendências de UI/UX design com especialistas da área.',
+        nomeUsuario: 'João Silva',
+        setor: 'Pista A',
+        tipoIngresso: 'Inteira',
+        horarioEntrada: '07:00h',
+        horarioInicio: '08:00h'
     },
     {
         id: 3,
@@ -31,7 +42,12 @@ const todosEventos = [
         local: 'Teatro Municipal, São Paulo',
         status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=500&auto=format&fit=crop',
-        descricao: 'Uma noite inesquecível com música ao vivo, ambiente aconchegante e ótimos músicos.'
+        descricao: 'Uma noite inesquecível com música ao vivo, ambiente aconchegante e ótimos músicos.',
+        nomeUsuario: 'João Silva',
+        setor: 'Pista A',
+        tipoIngresso: 'Inteira',
+        horarioEntrada: '07:00h',
+        horarioInicio: '08:00h'
     },
 
     // --- EVENTOS CONCLUÍDOS ---
@@ -41,7 +57,7 @@ const todosEventos = [
         organizador: 'Coletivo Music',
         data: '15 de Setembro, 20h',
         local: 'Parque da Cidade, São Paulo',
-        status: 'Ativo',
+        status: 'Inativo',
         imagem: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop',
         descricao: 'O maior festival de música de verão da região.'
     },
@@ -72,56 +88,69 @@ export default function MeusEventos() {
         return (
             <div className="meus-eventos-container">
 
-
-                <div className="detalhes-evento-wrapper">
+                <div className="detalhes-ingresso-container">
+                    {/* Card Superior: Modelo retangular horizontal igual ao da listagem */}
                     <img
                         src={eventoSelecionado.imagem}
                         alt={eventoSelecionado.nome}
-                        className="detalhes-imagem-principal"
+                        className="detalhes-banner-topo"
                     />
+                    <div className="card-ingresso-header">
+                        <div className="card-ingresso-qrcode">
+                            <img
+                                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Ingresso-${eventoSelecionado.id}`}
+                                alt="QR Code"
+                            />
+                        </div>
 
-                    <h2>{eventoSelecionado.nome}</h2>
+                        <div className="card-ingresso-info-rapida">
+                            <h2>{eventoSelecionado.nome}</h2>
+                            <p className="organizador">por {eventoSelecionado.organizador}</p>
+                            <p className="detalhes">📍 {eventoSelecionado.local}</p>
+                            <p className="detalhes">📅 {eventoSelecionado.data}</p>
+                        </div>
+                    </div>
 
-                    <div className="detalhes-grid">
+                    {/* Bloco de Informações do Titular e Ingresso */}
+                    <div className="card-titular-container">
+                        <h3>Informações do Ingresso</h3>
 
-                        <div className="card-info-detalhes">
-                            <div className="campo-info">
+                        <div className="grid-info-titular">
+                            <div className="campo-info-titular">
+                                <label>TITULAR DO INGRESSO</label>
+                                <p>{eventoSelecionado.nomeUsuario}</p>
+                            </div>
+
+                            <div className="campo-info-titular">
+                                <label>SETOR</label>
+                                <p>{eventoSelecionado.setor}</p>
+                            </div>
+
+                            <div className="campo-info-titular">
+                                <label>TIPO DE INGRESSO</label>
+                                <p>{eventoSelecionado.tipoIngresso}</p>
+                            </div>
+
+                            <div className="campo-info-titular">
+                                <label>HORÁRIO DE ENTRADA</label>
+                                <p>{eventoSelecionado.horarioEntrada}</p>
+                            </div>
+
+                            <div className="campo-info-titular">
+                                <label>INÍCIO DO EVENTO</label>
+                                <p>{eventoSelecionado.horarioInicio}</p>
+                            </div>
+
+                            <div className="campo-info-titular full-width">
                                 <label>DESCRIÇÃO</label>
                                 <p>{eventoSelecionado.descricao}</p>
                             </div>
-                            <div className="campo-info">
-                                <label>AUTOR DO EVENTO</label>
-                                <p>{eventoSelecionado.organizador}</p>
-                            </div>
-                            <div className="campo-info">
-                                <label>LOCAL</label>
-                                <p>{eventoSelecionado.local}</p>
-                            </div>
-                            <div className="campo-info">
-                                <label>DATA</label>
-                                <p>{eventoSelecionado.data}</p>
-                            </div>
-                        </div>
-
-                        {/* Bloco do Ingresso com QR Code */}
-                        <div className="card-qrcode-detalhes">
-                            <h3>Ingresso 1</h3>
-                            <p>{eventoSelecionado.data}</p>
-                            <p>{eventoSelecionado.local}</p>
-
-                            <div className="qrcode-box">
-                                {/* QR Code gerado dinamicamente via API gratuita do Google Charts */}
-                                <img
-                                    src={`https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=Ingresso-${eventoSelecionado.id}`}
-                                    alt="QR Code do Ingresso"
-                                />
-                            </div>
                         </div>
                     </div>
+                    <button className="btn-voltar" onClick={() => setEventoSelecionado(null)}>
+                        ← Voltar para Meus Eventos
+                    </button>
                 </div>
-                <button className="btn-voltar" onClick={() => setEventoSelecionado(null)}>
-                    ← Voltar para Meus Eventos
-                </button>
             </div>
         );
     }
