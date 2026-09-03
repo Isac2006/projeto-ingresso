@@ -9,7 +9,6 @@ const todosEventos = [
         organizador: 'Atletas Solidários',
         data: '10 de Outubro, 08h',
         local: 'Parque da Cidade, São Paulo',
-        preco: 'R$ 30,00',
         status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=500&auto=format&fit=crop',
         descricao: 'Uma corrida especial para arrecadar fundos e promover a saúde e bem-estar.'
@@ -20,7 +19,6 @@ const todosEventos = [
         organizador: 'Designers SP',
         data: '22 de Outubro, 14h',
         local: 'Centro Cultural, São Paulo',
-        preco: 'R$ 50,00',
         status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500&auto=format&fit=crop',
         descricao: 'Aprenda as principais tendências de UI/UX design com especialistas da área.'
@@ -31,7 +29,6 @@ const todosEventos = [
         organizador: 'Clube do Jazz',
         data: '05 de Novembro, 21h',
         local: 'Teatro Municipal, São Paulo',
-        preco: 'R$ 60,00',
         status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=500&auto=format&fit=crop',
         descricao: 'Uma noite inesquecível com música ao vivo, ambiente aconchegante e ótimos músicos.'
@@ -44,8 +41,7 @@ const todosEventos = [
         organizador: 'Coletivo Music',
         data: '15 de Setembro, 20h',
         local: 'Parque da Cidade, São Paulo',
-        preco: 'R$ 40,00',
-        status: 'Inativo',
+        status: 'Ativo',
         imagem: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&auto=format&fit=crop',
         descricao: 'O maior festival de música de verão da região.'
     },
@@ -55,7 +51,6 @@ const todosEventos = [
         organizador: 'Sabores da Cidade',
         data: '10 de Setembro, 12h',
         local: 'Praça Central, São Paulo',
-        preco: 'R$ 20,00',
         status: 'Inativo',
         imagem: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&auto=format&fit=crop',
         descricao: 'Diversos pratos típicos e chefs renomados reunidos.'
@@ -76,9 +71,7 @@ export default function MeusEventos() {
     if (eventoSelecionado) {
         return (
             <div className="meus-eventos-container">
-                <button className="btn-voltar" onClick={() => setEventoSelecionado(null)}>
-                    ← Voltar para Meus Eventos
-                </button>
+
 
                 <div className="detalhes-evento-wrapper">
                     <img
@@ -90,7 +83,7 @@ export default function MeusEventos() {
                     <h2>{eventoSelecionado.nome}</h2>
 
                     <div className="detalhes-grid">
-                        {/* Bloco de Informações */}
+
                         <div className="card-info-detalhes">
                             <div className="campo-info">
                                 <label>DESCRIÇÃO</label>
@@ -126,6 +119,9 @@ export default function MeusEventos() {
                         </div>
                     </div>
                 </div>
+                <button className="btn-voltar" onClick={() => setEventoSelecionado(null)}>
+                    ← Voltar para Meus Eventos
+                </button>
             </div>
         );
     }
@@ -134,6 +130,7 @@ export default function MeusEventos() {
     return (
         <div className="meus-eventos-container">
             <h1>Meus Eventos</h1>
+            <h4>Acompanhe os seus ingressos.</h4>
 
             {/* Botões para alternar a visualização */}
             <div className="fundo-toggle-abas">
@@ -152,23 +149,22 @@ export default function MeusEventos() {
             </div>
 
             {/* Lista de Eventos */}
-            <div className="grid-eventos">
+            <div className="grid-meus-eventos">
                 {eventosExibidos.map((evento) => (
-                    <div key={evento.id} className="card-evento">
-                        <img src={evento.imagem} alt={evento.nome} className="card-evento-img" />
+                    <div key={evento.id} className="card-meus-eventos">
+                        <img src={evento.imagem} alt={evento.nome} className="card-meus-eventos-img" />
 
-                        <div className="card-conteudo">
-                            <span className={`badge-status ${evento.status === 'Ativo' ? 'badge-ativo' : 'badge-inativo'}`}>
-                                {evento.status}
-                            </span>
+                        <div className="card-meus-eventos-conteudo">
+
                             <h3>{evento.nome}</h3>
                             <p className="organizador">por {evento.organizador}</p>
                             <p className="detalhes">{evento.data}</p>
                             <p className="detalhes">{evento.local}</p>
 
-                            <div className="card-rodape">
-                                <span className="preco">{evento.preco}</span>
-
+                            <div className="card-meus-eventos-rodape">
+                                <span className={`badge-status ${evento.status === 'Ativo' ? 'badge-ativo' : 'badge-inativo'}`}>
+                                    {evento.status}
+                                </span>
                                 {/* O botão "Ver Detalhes" só abre o modal se o evento for Ativo */}
                                 {evento.status === 'Ativo' ? (
                                     <button
