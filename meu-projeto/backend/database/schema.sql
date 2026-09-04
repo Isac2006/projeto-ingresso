@@ -62,9 +62,7 @@ CREATE TABLE evento (
     local_evento TEXT NOT NULL,
     categoria TEXT NOT NULL CHECK (categoria in ('show', 'teatro', 
                 'esporte', 'palestra', 'balada', 'casamento', 'outro')),
-    -- preço em centavos, considerando que pode ser grátis
-    preco_ingresso INTEGER NOT NULL CHECK (preco_ingresso >= 0),
-    capacidade_total INTEGER NOT NULL CHECK (capacidade_total > 0),
+    -- preço e capacidade foram para as tabelas preco e setor, respectivamente
     inicio_anuncio TEXT NOT NULL DEFAULT (datetime('now')),
     fim_anuncio TEXT NOT NULL,
     inicio_evento TEXT NOT NULL,
@@ -81,19 +79,41 @@ CREATE TABLE evento_imagem (
     UNIQUE (id_evento, ordem)
 );
 
+CREATE TABLE setor (
+    id_setor   INTEGER PRIMARY KEY,
+    id_evento  INTEGER NOT NULL REFERENCES evento(id_evento) ON DELETE CASCADE,
+    nome       TEXT NOT NULL,
+    capacidade INTEGER NOT NULL CHECK (capacidade > 0),
+    UNIQUE (id_evento, nome),
+    UNIQUE (id_setor, id_evento)
+);
+
+CREATE TABLE preco (
+    id_setor INTEGER NOT NULL REFERENCES setor(id_setor) ON DELETE CASCADE,
+    tipo     TEXT NOT NULL CHECK (tipo IN ('inteira', 'meia')),
+    valor    INTEGER NOT NULL CHECK (valor >= 0),
+    PRIMARY KEY (id_setor, tipo)
+);
+
 CREATE TABLE compra (
     id_compra INTEGER PRIMARY KEY,
     id_comprador INTEGER NOT NULL REFERENCES comprador(id_comprador),
     id_evento INTEGER NOT NULL REFERENCES evento(id_evento),
     data_compra TEXT NOT NULL DEFAULT (datetime('now')),
-    preco_unitario_pago INTEGER NOT NULL CHECK (preco_unitario_pago >= 0)
+    UNIQUE (id_compra, id_evento)
 );
 
 CREATE TABLE ingresso (
     id_ingresso INTEGER PRIMARY KEY,
-    id_compra INTEGER NOT NULL REFERENCES compra(id_compra),
+    id_compra INTEGER NOT NULL,
+    id_evento INTEGER NOT NULL,
+    id_setor INTEGER NOT NULL,
+    tipo TEXT NOT NULL CHECK (tipo in ('inteira', 'meia')),
+    preco_pago INTEGER NOT NULL CHECK (preco_pago >= 0),
     codigo_validacao TEXT NOT NULL UNIQUE,
-    data_validacao TEXT
+    data_validacao TEXT,
+    FOREIGN KEY (id_compra, id_evento) REFERENCES compra(id_compra, id_evento),
+    FOREIGN KEY (id_setor, id_evento) REFERENCES setor(id_setor, id_evento)
 );
 
 -- Índices das chaves estrangeiras
@@ -102,3 +122,4 @@ CREATE INDEX idx_evento_vendedor ON evento(id_vendedor);
 CREATE INDEX idx_compra_comprador ON compra(id_comprador);
 CREATE INDEX idx_compra_evento ON compra(id_evento);
 CREATE INDEX idx_ingresso_compra ON ingresso(id_compra);
+CREATE INDEX idx_ingresso_setor ON ingresso(id_setor);
