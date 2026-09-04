@@ -24,14 +24,54 @@ body {
   color: var(--text-primary);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
 /* Header com o gradiente exato */
 header {
   background: var(--gradient-primary);
   color: white;
   padding: 16px 32px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 12px;
+}
+
+header img {
+  display: none;
+}
+
+header .input-pesquisa {
+  flex: 1;
+  margin: 0;
+  max-width: 480px;
+}
+
+header button {
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: var(--radius-sm);
+  padding: 11px 18px;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+header button:hover {
+  background: rgba(255, 255, 255, 0.24);
 }
 
 header h1, header .logo {
@@ -88,6 +128,142 @@ h2, .secao-titulo {
   padding: 0 20px;
 }
 
+.emalta {
+  margin-top: 32px;
+}
+
+.emalta > div:first-child {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.emalta h1 {
+  margin: 0 0 18px;
+  font-size: 26px;
+}
+
+.emalta-carrossel {
+  position: relative;
+  width: calc(100% - 40px);
+  max-width: 1160px;
+  height: 390px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #172033;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+}
+
+.emalta-imagem,
+.emalta-sombra {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.emalta-imagem {
+  object-fit: cover;
+  transition: opacity 0.35s ease;
+}
+
+.emalta-sombra {
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.48) 45%, rgba(15, 23, 42, 0.08) 100%);
+}
+
+.emalta-informacoes {
+  position: absolute;
+  left: 8%;
+  bottom: 52px;
+  max-width: 520px;
+  color: white;
+}
+
+.emalta-etiqueta {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.emalta-informacoes h2 {
+  margin: 0 0 10px;
+  color: white;
+  font-size: clamp(24px, 4vw, 42px);
+  line-height: 1.08;
+  text-align: left;
+}
+
+.emalta-informacoes p {
+  margin: 0 0 20px;
+  color: #dbeafe;
+  font-size: 14px;
+}
+
+.emalta-informacoes button {
+  border: 0;
+  border-radius: var(--radius-sm);
+  padding: 11px 18px;
+  background: white;
+  color: #1d4ed8;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.emalta-informacoes button:hover {
+  background: #dbeafe;
+}
+
+.emalta-seta {
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.35);
+  color: white;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.emalta-seta:hover {
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.emalta-seta--prev { left: 20px; }
+.emalta-seta--next { right: 20px; }
+
+.emalta-pontos {
+  position: absolute;
+  right: 8%;
+  bottom: 24px;
+  display: flex;
+  gap: 7px;
+}
+
+.emalta-ponto {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.emalta-ponto.ativo {
+  width: 24px;
+  border-radius: 8px;
+  background: white;
+}
+
 /* Card de Evento (Design idêntico ao Figma) */
 .card-evento {
   width: 260px;
@@ -99,6 +275,7 @@ h2, .secao-titulo {
   display: flex;
   flex-direction: column;
   text-align: left;
+  cursor: pointer;
 }
 
 .card-evento:hover {
@@ -126,6 +303,7 @@ h2, .secao-titulo {
 
 .card-evento h3 {
   margin: 0;
+  padding: 16px;
   color: var(--text-primary);
   font-size: 15px;
   font-weight: 600;
@@ -282,20 +460,171 @@ h2, .secao-titulo {
 }/* Container Principal da Página Interna do Evento */
 .evento-selecionado {
   background-color: var(--surface-white);
-  max-width: 900px;
+  max-width: 1120px;
   margin: 40px auto;
-  padding: 40px;
+  padding: 28px 40px 40px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   box-sizing: border-box;
 }
 
-.evento-selecionado h1 {
-  font-size: 26px;
-  font-weight: 700;
+.voltar-evento {
+  margin-bottom: 20px;
+  border: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.voltar-evento:hover {
+  color: var(--primary-blue);
+}
+
+.evento-compra {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.evento-galeria .carousel-wrapper {
+  max-width: none;
+  margin: 0;
+}
+
+.evento-galeria .carousel-viewport {
+  height: 410px;
+  border-radius: var(--radius-md);
+}
+
+.painel-compra h1 {
+  margin: 8px 0 10px;
   color: var(--text-primary);
-  margin-top: 0;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.categoria-evento {
+  color: var(--primary-blue);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.avaliacao-evento {
+  margin: 0;
+  color: #15803d;
+  font-size: 13px;
+}
+
+.linha-separadora {
+  height: 1px;
+  margin: 20px 0;
+  background: var(--border-light);
+}
+
+.rotulo-preco {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.preco-evento {
+  display: block;
+  margin: 2px 0 22px;
+  color: var(--text-primary);
+  font-size: 32px;
+}
+
+.informacoes-evento {
+  display: grid;
+  gap: 12px;
   margin-bottom: 24px;
+}
+
+.informacoes-evento p {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.informacoes-evento strong,
+.painel-compra label {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.painel-compra .input-quantidade {
+  max-width: 110px;
+  margin: 8px 0 18px;
+  background: var(--surface-white);
+}
+
+.resumo-compra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+.resumo-compra strong {
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+.botao-comprar {
+  width: 100%;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--primary-blue);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao-comprar:hover {
+  background: #1d4ed8;
+}
+
+.compra-segura,
+.mensagem-compra {
+  margin: 12px 0 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.mensagem-compra {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.descricao-evento {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-light);
+}
+
+.descricao-evento h3 {
+  margin: 0 0 8px;
+  color: var(--text-primary);
+}
+
+.descricao-evento p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 /* Área de Ações e Formulário de Ingressos */
@@ -439,4 +768,300 @@ footer {
   border-top: 1px solid #1e293b;
   font-size: 12px;
   color: #64748b;
+}
+/* =========================
+   CATEGORIAS
+========================= */
+
+.categorias {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.categoria {
+  width: 100%;
+  margin-bottom: 45px;
+}
+
+.categoria h1 {
+  text-align: left;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 18px 0;
+}
+
+
+/* =========================
+   LISTA DE EVENTOS
+========================= */
+
+.carrossel-categoria {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carrossel-categoria .eventos {
+  flex: 1;
+  min-width: 0;
+  scrollbar-width: none;
+}
+
+.carrossel-categoria .eventos::-webkit-scrollbar {
+  display: none;
+}
+
+.categoria-seta {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  background: var(--surface-white);
+  color: var(--text-primary);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.1);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.categoria-seta:hover {
+  background: var(--primary-purple);
+  color: white;
+}
+
+.eventos {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 5px 5px 20px;
+
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
+}
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+.eventos::-webkit-scrollbar {
+  height: 7px;
+}
+
+.eventos::-webkit-scrollbar-track {
+  background: var(--border-light);
+  border-radius: 10px;
+}
+
+.eventos::-webkit-scrollbar-thumb {
+  background: var(--primary-purple);
+  border-radius: 10px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.eventos .evento {
+  flex: 0 0 260px;
+
+  width: 260px;
+  min-width: 260px;
+
+  background: var(--surface-white);
+
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+
+  box-shadow: var(--shadow-card);
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================
+   HOVER CARD
+========================= */
+
+.eventos .evento:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+.eventos .evento img {
+  display: block;
+
+  width: 100%;
+  height: 160px;
+
+  object-fit: cover;
+
+  border: none;
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.eventos .evento h2 {
+  text-align: left;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: var(--text-primary);
+
+  margin: 14px 14px 8px;
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.eventos .evento p {
+  font-size: 13px;
+
+  color: var(--text-secondary);
+
+  margin: 6px 14px;
+}
+
+
+/* PREÇO */
+
+.eventos .evento p:last-of-type {
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: var(--primary-purple);
+
+  margin-top: 10px;
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.eventos .evento button {
+  display: block;
+
+  width: calc(100% - 28px);
+
+  margin: 15px 14px;
+
+  padding: 9px 12px;
+
+  background: var(--gradient-primary);
+
+  color: white;
+
+  border: none;
+
+  border-radius: var(--radius-sm);
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.eventos .evento button:hover {
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 14px 16px;
+  }
+
+  header button {
+    padding: 10px 12px;
+  }
+
+  .evento-selecionado {
+    margin: 24px 16px;
+    padding: 24px 18px;
+  }
+
+  .evento-compra {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .evento-galeria .carousel-viewport {
+    height: 280px;
+  }
+
+  .painel-compra h1 {
+    font-size: 24px;
+  }
+
+  .carousel-viewport {
+    height: 220px;
+  }
+
+  .emalta-carrossel {
+    width: calc(100% - 32px);
+    height: 360px;
+  }
+
+  .emalta-informacoes {
+    left: 24px;
+    right: 24px;
+    bottom: 52px;
+  }
+
+  .emalta-sombra {
+    background: linear-gradient(0deg, rgba(15, 23, 42, 0.92) 0%, rgba(15, 23, 42, 0.18) 100%);
+  }
+
+  .emalta-pontos {
+    right: 24px;
+  }
+
+  .categoria-seta {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+    font-size: 22px;
+  }
 }
