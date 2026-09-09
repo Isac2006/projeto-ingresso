@@ -1,7 +1,7 @@
 .configuracoes {
     max-width: 500px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 40px 20px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     text-align: center;
 }
@@ -9,7 +9,6 @@
 .configuracoes-titulo {
     font-size: 28px;
     font-weight: 700;
-    margin-top: 40px;
     margin-bottom: 40px;
 }
 

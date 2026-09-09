@@ -16,6 +16,7 @@
     font-size: 22px;
     font-weight: 700;
     color: white;
+    text-decoration: none;
 }
 
 .navbar-pages {
@@ -23,12 +24,21 @@
     font-size: 16px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+
+#navbar-title:hover, .navbar-pages:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-avatar-link {
+    margin-left: auto;
+    margin-right: 48px;
+    display: flex;
+    align-items: center;
 }
 
 #navbar-avatar {
-    margin-top: 28px;
-    margin-right: 28px;
-    margin-right: 48px;
     margin-left: auto;
     width: 40px;
     height: 40px;

@@ -1,13 +1,31 @@
+import { Link } from 'react-router-dom'
 import './App.css'
 import './NavBar.css'
 
 function NavBar() {
     return (
-        <div className='navbar'>
-            <p id="navbar-title">EventHub</p>
-            <p className="navbar-pages">Explorar</p>
-            <p className="navbar-pages">Meus Eventos</p>
-            <img src="./images/user.png" id="navbar-avatar"></img>
+        <div className="navbar">
+
+            <Link to="/" id="navbar-title">
+                EventHub
+            </Link>
+
+            <Link to="/" className="navbar-pages">
+                Explorar
+            </Link>
+
+            <Link to="/meus-eventos" className="navbar-pages">
+                Meus Eventos
+            </Link>
+
+            <Link to="/configuracoes" className="navbar-avatar-link">
+                <img
+                    src="./images/user.png"
+                    id="navbar-avatar"
+                    alt="Perfil"
+                />
+            </Link>
+
         </div>
     )
 }

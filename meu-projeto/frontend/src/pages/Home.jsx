@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react'
 import '../App.css'
-import NavBar from '../NavBar.jsx'
-import Footer from '../Footer.jsx'
 import Emalta, { listadeeventos, Carousel } from '../emalta.jsx'
 
 export default function Home() {
@@ -40,8 +38,6 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
-
       {eventoSelecionado === null ? (
 
         <>
@@ -209,8 +205,6 @@ export default function Home() {
         </div>
 
       )}
-
-    <Footer />
 
     </>
   )
