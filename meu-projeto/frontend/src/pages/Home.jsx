@@ -1,10 +1,8 @@
 import { useRef, useState } from 'react'
 import '../App.css'
-import Header from '../header.jsx'
 import Emalta, { listadeeventos, Carousel } from '../emalta.jsx'
 
 export default function Home() {
-
   const [eventoSelecionado, setEventoSelecionado] = useState(null)
   const [quantidade, setQuantidade] = useState(1)
   const [compraRealizada, setCompraRealizada] = useState(false)
@@ -31,15 +29,15 @@ export default function Home() {
     "Música",
     "Tecnologia"
   ]
-function converterData(data) {
-  const [dia, mes, ano] = data.split("/");
+  
+  function converterData(data) {
+    const [dia, mes, ano] = data.split("/");
 
-  return new Date(ano, mes - 1, dia);
-}
+    return new Date(ano, mes - 1, dia);
+  }
+
   return (
     <>
-      <Header />
-
       {eventoSelecionado === null ? (
 
         <>
