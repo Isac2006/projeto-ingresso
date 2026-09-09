@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import '../App.css'
+import NavBar from '../NavBar.jsx'
 import Header from '../header.jsx'
 import Emalta, { listadeeventos } from '../emalta.jsx'
+import Footer from '../Footer.jsx'
 
 export default function Home(){
   const [eventoSelecionado, setEventoSelecionado] = useState(null)
@@ -10,7 +12,7 @@ export default function Home(){
   const evento = listadeeventos.find(e => e.id === eventoSelecionado)
 
   return <>
-      <Header />
+      <NavBar />
 
       {eventoSelecionado === null ? (
         <Emalta
@@ -53,5 +55,6 @@ export default function Home(){
           </div>
         </div>
       )}
+      <Footer />
     </>
 }
