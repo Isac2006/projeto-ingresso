@@ -31,3 +31,7 @@ __pycache__/
 venv/
 env/
 *.egg-info/
+# Banco de dados local
+*.db
+*.sqlite
+*.sqlite3
