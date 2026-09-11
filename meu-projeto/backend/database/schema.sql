@@ -9,7 +9,6 @@ CREATE TABLE vendedor (
 
 );
 
-
 CREATE TABLE comprador (
     id_comprador  INTEGER PRIMARY KEY,
     nome          TEXT NOT NULL,
@@ -19,7 +18,6 @@ CREATE TABLE comprador (
     saldo         INTEGER NOT NULL DEFAULT 0 CHECK (saldo >= 0),
     data_cadastro TEXT NOT NULL DEFAULT (datetime('now'))
 );
-
 
 --esta tabela serve para validar o cadastro do usuário
 
