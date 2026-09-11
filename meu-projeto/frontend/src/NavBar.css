@@ -1,0 +1,46 @@
+.navbar {
+    display: flex;
+    align-items: left;
+    gap: 50px;
+    width: 100%;
+    height: 96px;
+    
+    background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+#navbar-title {
+    margin-left: 48px;
+    margin-top: 34px;
+    margin-bottom: 34px;
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-pages {
+    margin: 38.5px 0px;
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+
+#navbar-title:hover, .navbar-pages:hover {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.navbar-avatar-link {
+    margin-left: auto;
+    margin-right: 48px;
+    display: flex;
+    align-items: center;
+}
+
+#navbar-avatar {
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}

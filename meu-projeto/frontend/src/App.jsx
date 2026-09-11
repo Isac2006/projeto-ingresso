@@ -1,30 +1,29 @@
-import { useState } from 'react'
 import './App.css'
-import Home from './pages/home.jsx'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+import NavBar from './NavBar.jsx'
+import Footer from './Footer.jsx'
+
+import Home from './pages/Home.jsx'
 import Cadastro from './pages/Cadastro.jsx'
 import Login from './pages/Login.jsx'
+import ConfiguracoesUsuario from './pages/ConfiguracoesUsuario.jsx'
 
 function App() {
-  const [pagina, setPagina] = useState('home')
-
   return (
-    <>
-      {pagina === 'home' && <Home />}
-      {pagina === 'cadastro' && <Cadastro />}
-      {pagina === 'login' && <Login />}
+    <BrowserRouter>
+      <NavBar />
 
-      <button onClick={() => setPagina('home')}>
-        Home
-      </button>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/configuracoes" element={<ConfiguracoesUsuario />} />
+      </Routes>
 
-      <button onClick={() => setPagina('cadastro')}>
-        Cadastro
-      </button>
+      <Footer />
 
-      <button onClick={() => setPagina('login')}>
-        Login
-      </button>
-    </>
+    </BrowserRouter>
   )
 }
 
