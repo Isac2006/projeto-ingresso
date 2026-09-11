@@ -1,8 +1,8 @@
 CREATE TABLE vendedor (
     id_vendedor INTEGER PRIMARY KEY, -- SQLite já vai preencher automaticamente
     nome          TEXT NOT NULL,
-    username      TEXT NOT NULL UNIQUE,
-    email         TEXT NOT NULL UNIQUE,
+    username      TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    email         TEXT NOT NULL UNIQUE COLLATE NOCASE,
     senha_hash    TEXT NOT NULL,
     saldo         INTEGER NOT NULL DEFAULT 0 CHECK (saldo >= 0),
     data_cadastro TEXT NOT NULL DEFAULT (datetime('now'))
@@ -13,8 +13,8 @@ CREATE TABLE vendedor (
 CREATE TABLE comprador (
     id_comprador  INTEGER PRIMARY KEY,
     nome          TEXT NOT NULL,
-    username      TEXT NOT NULL UNIQUE,
-    email         TEXT NOT NULL UNIQUE,
+    username      TEXT NOT NULL UNIQUE COLLATE NOCASE,
+    email         TEXT NOT NULL UNIQUE COLLATE NOCASE,
     senha_hash    TEXT NOT NULL,
     saldo         INTEGER NOT NULL DEFAULT 0 CHECK (saldo >= 0),
     data_cadastro TEXT NOT NULL DEFAULT (datetime('now'))
@@ -27,8 +27,8 @@ CREATE TABLE usuario_pendente (
 
     id_cadastro INTEGER PRIMARY KEY,
     nome        TEXT NOT NULL,
-    username    TEXT NOT NULL,
-    email       TEXT NOT NULL,
+    username    TEXT NOT NULL COLLATE NOCASE,
+    email       TEXT NOT NULL COLLATE NOCASE,
     senha_hash  TEXT NOT NULL,
     tipo        TEXT NOT NULL CHECK (tipo IN ('comprador', 'vendedor')), 
     codigo      TEXT NOT NULL, -- para que 0042 não vire 42
@@ -60,8 +60,8 @@ CREATE TABLE evento (
     nome TEXT NOT NULL,
     descricao TEXT,
     local_evento TEXT NOT NULL,
-    categoria TEXT NOT NULL CHECK (categoria in ('show', 'teatro', 
-                'esporte', 'palestra', 'balada', 'casamento', 'outro')),
+    categoria TEXT NOT NULL CHECK (categoria in ('cinema', 'comedia', 'cultura', 'danca',
+     'festival', 'gastronomia', 'musica', 'tecnologia', 'outro')),
     -- preço e capacidade foram para as tabelas preco e setor, respectivamente
     inicio_anuncio TEXT NOT NULL DEFAULT (datetime('now')),
     fim_anuncio TEXT NOT NULL,
