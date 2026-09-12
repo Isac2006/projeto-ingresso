@@ -2,6 +2,5 @@ fastapi
 uvicorn
 pydantic
 email-validator
-sqlite3
 pwdlib[argon2]
 python-jose[cryptography]

@@ -9,16 +9,15 @@ TABELAS = {
 }
 
 def conta_existente(conn, email, username):
-    """Devolve 'comprador', 'vendedor' ou None."""
+    """Retorna uma lista com todos os tipos de conta que aquele usuario já possui"""
     sql = """
         SELECT 'comprador' AS tipo FROM comprador WHERE email = ? OR username = ?
         UNION ALL
-        SELECT 'vendedor' AS tipo from vendedor WHERE email = ? OR username = ? 
-        LIMIT 1
+        SELECT 'vendedor' AS tipo FROM vendedor WHERE email = ? OR username = ? 
     """
-
-    linha = conn.execute(sql, (email, username, email, username)).fetchone()
-    return linha["tipo"] if linha else None
+    linhas = conn.execute(sql, (email, username, email, username)).fetchall()
+    
+    return [linha["tipo"] for linha in linhas]
 
 def gravar_usuario_pendente(conn, nome, username, email, senha_hash, tipo, codigo):
     """Grava o cadastro pendente. Se já existir um cadastro para este e-mail e este tipo, 
